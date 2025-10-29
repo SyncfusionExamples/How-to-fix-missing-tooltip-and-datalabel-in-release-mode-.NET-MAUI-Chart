@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:local="clr-namespace:sample"
+             x:Class="sample.MainPage">
+    <chart:SfCartesianChart x:Name="chart">
+        <chart:SfCartesianChart.Resources>
+            <local:TooltipConverter x:Key="tooltipConverter" />
+
+            <!-- Tooltip Template -->
+            <DataTemplate x:Key="tooltiptemplate">
+                <StackLayout x:DataType="chart:TooltipInfo" Orientation="Vertical">
+                    <Label Text="{Binding Item, Converter={StaticResource tooltipConverter},
+                                          ConverterParameter=Planned,
+                                          StringFormat='Planned : {0}h'}"
+                           TextColor="White" />
+                </StackLayout>
+            </DataTemplate>
+
+            <!-- Data Label Template -->
+            <DataTemplate x:Key="labelTemplate">
+                <StackLayout x:DataType="chart:ChartDataLabel" Orientation="Vertical">
+                    <Label Text="{Binding Item, Converter={StaticResource tooltipConverter},
+                                          ConverterParameter=Planned,
+                                          StringFormat='Label : {0}h'}"
+                           TextColor="Black" />
+                </StackLayout>
+            </DataTemplate>
+        </chart:SfCartesianChart.Resources>
+
+        <chart:SplineAreaSeries x:Name="series"
+                                ItemsSource="{Binding ChartData}"
+                                XBindingPath="WeekNumber"
+                                YBindingPath="Planned"
+                                EnableTooltip="True"
+                                ShowDataLabels="True"
+                                LabelTemplate="{StaticResource labelTemplate}"
+                                TooltipTemplate="{StaticResource tooltiptemplate}">
+            <chart:SplineAreaSeries.DataLabelSettings>
+                <chart:CartesianDataLabelSettings LabelPlacement="Outer"/>
+            </chart:SplineAreaSeries.DataLabelSettings>
+        </chart:SplineAreaSeries>
+
+        <chart:SfCartesianChart.XAxes>
+            <chart:NumericalAxis/>
+        </chart:SfCartesianChart.XAxes>
+        <chart:SfCartesianChart.YAxes>
+            <chart:NumericalAxis/>
+        </chart:SfCartesianChart.YAxes>
+
+        <chart:SfCartesianChart.BindingContext>
+            <local:ViewModel/>
+        </chart:SfCartesianChart.BindingContext>
+    </chart:SfCartesianChart>
+</ContentPage>
