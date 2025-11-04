@@ -17,7 +17,7 @@ namespace sample
         }
     }
 
-    public class TooltipConverter : IValueConverter
+    public class ValueConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
