@@ -24,9 +24,10 @@ This sample demonstrates how to reliably show tooltips and data labels in Releas
 
 ## Output:
 
+<img width="347" height="719" alt="Screenshot 2025-10-31 094055" src="https://github.com/user-attachments/assets/0ba63f94-237e-496d-aaf4-f7ee31bc9ef9" />
 
 ## Troubleshooting
 If you are facing a path too long exception when building this example project, close Visual Studio and rename the repository to short and build the project.
 
-For a step-by-step procedure, refer to the [How to display data labels for specific data points in .NET MAUI Cartesian Chart?](https://support.syncfusion.com/kb/article/21702/how-to-display-data-labels-for-specific-data-points-in-net-maui-cartesian-chart) KB article.
+For a step-by-step procedure, refer to the [How to display tooltip and datalabel in Release Mode .NET MAUI Cartesian Chart?](https://support.syncfusion.com/kb/article/21677/why-tooltip-and-datalabel-are-missing-in-release-mode-net-maui-chart) KB article.
 
