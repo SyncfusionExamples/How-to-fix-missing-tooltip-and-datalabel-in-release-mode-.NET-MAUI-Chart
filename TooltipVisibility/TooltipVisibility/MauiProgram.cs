@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-using Syncfusion.Maui.Core.Hosting;
+using Syncfusion.Maui.Toolkit.Hosting;
 
 namespace TooltipVisibility
 {
@@ -10,7 +10,7 @@ namespace TooltipVisibility
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .ConfigureSyncfusionCore()
+                .ConfigureSyncfusionToolkit()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
