@@ -25,6 +25,7 @@ namespace TooltipVisibility.Converters
                         return model.Planned;
                 }
             }
+            
             return value;
         }
 
