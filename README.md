@@ -24,8 +24,7 @@ This sample demonstrates how to reliably show tooltips and data labels in Releas
 
 ## Output:
 
-<img width="357" height="670" alt="Screenshot 2025-12-01 103119" src="https://github.com/user-attachments/assets/643b7406-517d-4d90-80ab-87c0f4351286" />
-
+<img width="1103" height="516" alt="Screenshot 2025-12-02 114142" src="https://github.com/user-attachments/assets/12757933-ce4e-4ee3-812b-4486c465db9c" />
 
 ## Troubleshooting
 If you are facing a path too long exception when building this example project, close Visual Studio and rename the repository to short and build the project.
