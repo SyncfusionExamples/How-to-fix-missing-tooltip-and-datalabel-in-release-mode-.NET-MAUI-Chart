@@ -1,10 +1,16 @@
 ﻿using System.Collections.ObjectModel;
 using TooltipVisibility.Models;
+#if IOS
+using Foundation;
+#endif
 
 namespace TooltipVisibility.ViewModels
 {
     public class ChartViewModel
     {
+#if IOS
+        [Preserve(AllMembers = true)]
+#endif
         public ObservableCollection<WeekPlan> ChartData { get; } = new()
         {
             new WeekPlan { WeekNumber = 1, Planned = 3 },
