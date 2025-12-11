@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TooltipVisibility.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
+    xmlns:vm="clr-namespace:TooltipVisibility.ViewModels"
+    xmlns:local="clr-namespace:TooltipVisibility.Converters">
+
+    <ContentPage.BindingContext>
+        <vm:ChartViewModel/>
+    </ContentPage.BindingContext>
+
+    <!-- Converter resource -->
+    <ContentPage.Resources>
+        <local:ValueConverter x:Key="ValueConverter"/>
+    </ContentPage.Resources>
+
+    <Border Padding="18" Stroke="Gray" StrokeThickness="2" Margin="10">
+
+        <chart:SfCartesianChart>
+
+            <chart:SfCartesianChart.Title>
+                <Label Text="Weekly Planned Hours" FontSize="20" FontAttributes="Bold" HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"/>
+            </chart:SfCartesianChart.Title>
+            <chart:SplineAreaSeries ItemsSource="{Binding ChartData}"
+                                            XBindingPath="WeekNumber"
+                                            YBindingPath="Planned"
+                                            EnableTooltip="True"
+                                            ShowDataLabels="True"
+                                            Stroke="#4F46E5"
+                                            StrokeWidth="2">
+
+                <!-- Gradient fill -->
+                <chart:SplineAreaSeries.Fill>
+                    <LinearGradientBrush StartPoint="0,0"
+                                                 EndPoint="0,1">
+                        <GradientStop Color="#FF4F46E5"
+                                              Offset="0"/>
+                        <GradientStop Color="#294F46E5"
+                                              Offset="1"/>
+                    </LinearGradientBrush>
+                </chart:SplineAreaSeries.Fill>
+
+                <!-- Data label style -->
+                <chart:SplineAreaSeries.DataLabelSettings>
+                    <chart:CartesianDataLabelSettings LabelPlacement="Outer"
+                                                              UseSeriesPalette="False">
+                        <chart:CartesianDataLabelSettings.LabelStyle>
+                            <chart:ChartDataLabelStyle
+                                        Background="{AppThemeBinding Light=#EEF2FF, Dark=#1E2A52}"
+                                        CornerRadius="8"
+                                        Margin="0,2"
+                                        FontSize="12"
+                                        TextColor="{AppThemeBinding Light=#111827, Dark=#E5E7EB}"/>
+                        </chart:CartesianDataLabelSettings.LabelStyle>
+                    </chart:CartesianDataLabelSettings>
+                </chart:SplineAreaSeries.DataLabelSettings>
+
+                <!-- Data label content (via converter) -->
+                <chart:SplineAreaSeries.LabelTemplate>
+                    <DataTemplate x:DataType="chart:ChartDataLabel">
+                        <Label Text="{Binding Item,
+                                                      Converter={StaticResource ValueConverter},
+                                                      ConverterParameter=Planned,
+                                                      StringFormat='{}    {0}h'}"/>
+                    </DataTemplate>
+                </chart:SplineAreaSeries.LabelTemplate>
+
+                <!-- Tooltip (via converter) -->
+                <chart:SplineAreaSeries.TooltipTemplate>
+                    <DataTemplate x:DataType="chart:TooltipInfo">
+                        <Border Padding="8"
+                                        BackgroundColor="{AppThemeBinding Light=#111827, Dark=#0B1220}">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Item.WeekNumber, StringFormat='Week {0}'}"
+                                               TextColor="White"
+                                               FontAttributes="Bold"/>
+                                <Label Text="{Binding Item,
+                                                          Converter={StaticResource ValueConverter},
+                                                          ConverterParameter=Planned,
+                                                          StringFormat='Planned: {0} h'}"
+                                               TextColor="#D1D5DB"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </chart:SplineAreaSeries.TooltipTemplate>
+            </chart:SplineAreaSeries>
+
+            <!-- X Axis -->
+            <chart:SfCartesianChart.XAxes>
+                <chart:NumericalAxis Minimum="1"
+                                             Maximum="5.2"
+                                             Interval="1">
+                    <chart:NumericalAxis.Title>
+                        <chart:ChartAxisTitle Text="Week"/>
+                    </chart:NumericalAxis.Title>
+                    <chart:NumericalAxis.AxisLineStyle>
+                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light=#CBD5E1, Dark=#2C3A5C}"
+                                                      StrokeWidth="1"/>
+                    </chart:NumericalAxis.AxisLineStyle>
+                    <chart:NumericalAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#374151, Dark=#BFC8E6}"/>
+                    </chart:NumericalAxis.LabelStyle>
+                    <chart:NumericalAxis.MajorGridLineStyle>
+                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#24304C}"
+                                                      StrokeWidth="1"/>
+                    </chart:NumericalAxis.MajorGridLineStyle>
+                </chart:NumericalAxis>
+            </chart:SfCartesianChart.XAxes>
+
+            <!-- Y Axis -->
+            <chart:SfCartesianChart.YAxes>
+                <chart:NumericalAxis Minimum="0"
+                                             Maximum="7.8"
+                                             Interval="1">
+                    <chart:NumericalAxis.Title>
+                        <chart:ChartAxisTitle Text="Hours"/>
+                    </chart:NumericalAxis.Title>
+                    <chart:NumericalAxis.AxisLineStyle>
+                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light=#CBD5E1, Dark=#2C3A5C}"
+                                                      StrokeWidth="1"/>
+                    </chart:NumericalAxis.AxisLineStyle>
+                    <chart:NumericalAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#374151, Dark=#BFC8E6}"/>
+                    </chart:NumericalAxis.LabelStyle>
+                    <chart:NumericalAxis.MajorGridLineStyle>
+                        <chart:ChartLineStyle Stroke="{AppThemeBinding Light=#E5E7EB, Dark=#24304C}"
+                                                      StrokeWidth="1"/>
+                    </chart:NumericalAxis.MajorGridLineStyle>
+                </chart:NumericalAxis>
+            </chart:SfCartesianChart.YAxes>
+
+        </chart:SfCartesianChart>
+    </Border>
+
+</ContentPage>
